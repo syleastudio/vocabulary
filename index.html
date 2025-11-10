@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Word of the Day • Sylea Studio</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F4E8D2;
+      --fg: #1C1D22;
+    }
+
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 6px 22px rgba(28,29,34,0.08);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .lang {
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .word {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .translation {
+      font-size: 16px;
+      color: rgba(28,29,34,0.75);
+      margin-bottom: 12px;
+    }
+
+    .description {
+      font-size: 14px;
+      color: rgba(28,29,34,0.75);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: rgba(28,29,34,0.55);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Word of the Day</h1>
+    <div class="lang" id="lang"></div>
+    <div class="word" id="word">—</div>
+    <div class="translation" id="translation"></div>
+    <div class="description" id="description"></div>
+    <div class="footer">Sylea Studio • Polyglot OS</div>
+  </div>
+
+  <script>
+    const WORDS = {
+      English: [
+        { word: "Serendipity", trans: "Finding good things by chance", desc: "The occurrence of events by chance that result in something pleasant or beneficial." },
+        { word: "Ethereal", trans: "Delicate and light", desc: "Something extremely delicate, refined, and light in a way that seems not of this world." },
+        { word: "Ephemeral", trans: "Lasting a short time", desc: "Describes something fleeting or temporary, like a sunset or a feeling." },
+      ],
+      Spanish: [
+        { word: "Sobremesa", trans: "Time spent after eating", desc: "The period after a meal when people stay at the table to chat and enjoy each other’s company." },
+        { word: "Querencia", trans: "Place of belonging", desc: "A place where one feels safe and at home; a deep emotional attachment to a space." },
+        { word: "Duende", trans: "Soulful inspiration", desc: "A mysterious power that moves people emotionally through art, music, or dance." },
+      ],
+      French: [
+        { word: "Flâneur", trans: "Urban wanderer", desc: "A person who strolls through the city observing society with curiosity and reflection." },
+        { word: "Dépaysement", trans: "Feeling of disorientation", desc: "The sensation of being in a different place or culture, out of one’s element." },
+        { word: "Joie de vivre", trans: "Joy of living", desc: "A cheerful enjoyment of life; an exuberant spirit." },
+      ],
+      German: [
+        { word: "Fernweh", trans: "Longing for distant places", desc: "A strong desire to travel and experience faraway places." },
+        { word: "Wanderlust", trans: "Love for travel", desc: "A deep desire to explore the world and go on adventures." },
+        { word: "Zeitgeist", trans: "Spirit of the times", desc: "The general mood or ideas characteristic of a particul
