@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Word of the Day • Sylea Studio</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --bg: #F4E8D2;
@@ -34,73 +32,162 @@
       max-width: 420px;
       text-align: center;
       box-shadow: 0 6px 22px rgba(28,29,34,0.08);
+      transition: all 0.3s ease;
     }
 
     h1 {
       font-size: 20px;
-      margin-bottom: 6px;
+      margin-bottom: 12px;
     }
 
     .lang {
       font-size: 14px;
       opacity: 0.7;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     .word {
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin: 6px 0;
     }
 
     .translation {
       font-size: 16px;
       color: rgba(28,29,34,0.75);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .description {
       font-size: 14px;
       color: rgba(28,29,34,0.75);
       line-height: 1.5;
-      margin-bottom: 16px;
+      min-height: 40px;
+    }
+
+    button {
+      margin-top: 18px;
+      background: var(--fg);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      opacity: 0.9;
     }
 
     .footer {
       font-size: 12px;
       color: rgba(28,29,34,0.55);
-      margin-top: 20px;
+      margin-top: 22px;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
   <div class="card">
     <h1>Word of the Day</h1>
-    <div class="lang" id="lang"></div>
-    <div class="word" id="word">—</div>
-    <div class="translation" id="translation"></div>
-    <div class="description" id="description"></div>
+    <div id="content" class="fade">
+      <div class="lang" id="lang"></div>
+      <div class="word" id="word">—</div>
+      <div class="translation" id="translation"></div>
+      <div class="description" id="description"></div>
+    </div>
+    <button id="generate">Generate Word</button>
     <div class="footer">Sylea Studio • Polyglot OS</div>
   </div>
 
   <script>
     const WORDS = {
       English: [
-        { word: "Serendipity", trans: "Finding good things by chance", desc: "The occurrence of events by chance that result in something pleasant or beneficial." },
-        { word: "Ethereal", trans: "Delicate and light", desc: "Something extremely delicate, refined, and light in a way that seems not of this world." },
-        { word: "Ephemeral", trans: "Lasting a short time", desc: "Describes something fleeting or temporary, like a sunset or a feeling." },
+        { word: "Serendipity", trans: "Finding good things by chance", desc: "An unexpected and pleasant discovery that happens by accident." },
+        { word: "Ethereal", trans: "Delicate and light", desc: "Extremely delicate and light in a way that seems too perfect for this world." },
+        { word: "Ephemeral", trans: "Lasting a short time", desc: "Something fleeting and temporary, like a sunset or a moment of happiness." },
       ],
       Spanish: [
-        { word: "Sobremesa", trans: "Time spent after eating", desc: "The period after a meal when people stay at the table to chat and enjoy each other’s company." },
-        { word: "Querencia", trans: "Place of belonging", desc: "A place where one feels safe and at home; a deep emotional attachment to a space." },
-        { word: "Duende", trans: "Soulful inspiration", desc: "A mysterious power that moves people emotionally through art, music, or dance." },
+        { word: "Sobremesa", trans: "After-meal talk", desc: "Time spent talking and relaxing after eating, enjoying good company." },
+        { word: "Duende", trans: "Soulful inspiration", desc: "A mysterious power that moves people deeply through art or music." },
+        { word: "Querencia", trans: "Place of belonging", desc: "A space where one feels safe, at home, or drawn to instinctively." },
       ],
       French: [
-        { word: "Flâneur", trans: "Urban wanderer", desc: "A person who strolls through the city observing society with curiosity and reflection." },
-        { word: "Dépaysement", trans: "Feeling of disorientation", desc: "The sensation of being in a different place or culture, out of one’s element." },
-        { word: "Joie de vivre", trans: "Joy of living", desc: "A cheerful enjoyment of life; an exuberant spirit." },
+        { word: "Flâneur", trans: "Urban wanderer", desc: "A person who strolls through the city observing life with curiosity." },
+        { word: "Dépaysement", trans: "Feeling of disorientation", desc: "The sensation of being in a new environment far from what’s familiar." },
+        { word: "Joie de vivre", trans: "Joy of living", desc: "A cheerful enjoyment and love for life itself." },
       ],
       German: [
-        { word: "Fernweh", trans: "Longing for distant places", desc: "A strong desire to travel and experience faraway places." },
-        { word: "Wanderlust", trans: "Love for travel", desc: "A deep desire to explore the world and go on adventures." },
-        { word: "Zeitgeist", trans: "Spirit of the times", desc: "The general mood or ideas characteristic of a particul
+        { word: "Fernweh", trans: "Longing for faraway places", desc: "A strong desire to travel and explore distant lands." },
+        { word: "Wanderlust", trans: "Desire to travel", desc: "A strong impulse or longing to explore the world." },
+        { word: "Zeitgeist", trans: "Spirit of the times", desc: "The defining mood or ideas of a particular period in history." },
+      ],
+      Italian: [
+        { word: "Meriggiare", trans: "Rest at noon", desc: "To rest or doze during the hottest part of the day, often in the countryside." },
+        { word: "Sprezzatura", trans: "Effortless grace", desc: "The art of making difficult things look easy and natural." },
+        { word: "Abbiocco", trans: "Post-meal drowsiness", desc: "The pleasant sleepiness after a large, satisfying meal." },
+      ],
+      Japanese: [
+        { word: "Komorebi", trans: "Sunlight through trees", desc: "The beautiful effect of sunlight filtering through leaves." },
+        { word: "Tsundoku", trans: "Book hoarding", desc: "Buying books and letting them pile up without reading them." },
+        { word: "Wabi-sabi", trans: "Beauty in imperfection", desc: "Finding beauty in impermanence and imperfection." },
+      ],
+      Chinese: [
+        { word: "缘分 (yuánfèn)", trans: "Fateful connection", desc: "The mysterious force that brings people together in life." },
+        { word: "安静 (ānjìng)", trans: "Quiet / Peaceful", desc: "Describes calmness, tranquility, and inner peace." },
+        { word: "家 (jiā)", trans: "Home", desc: "A concept that represents belonging, comfort, and family." },
+      ],
+      Portuguese: [
+        { word: "Saudade", trans: "Nostalgic longing", desc: "A deep emotional state of missing something or someone dearly." },
+        { word: "Cafuné", trans: "Gentle touch", desc: "The act of running your fingers through a loved one’s hair." },
+        { word: "Desenrascanço", trans: "Improvised solution", desc: "Solving a problem creatively with limited resources." },
+      ],
+      Russian: [
+        { word: "Тоска (Toska)", trans: "Longing", desc: "A deep spiritual sadness with no clear cause." },
+        { word: "Родина (Rodina)", trans: "Homeland", desc: "An emotional attachment to one’s native land." },
+        { word: "Душа (Dusha)", trans: "Soul", desc: "Represents emotional and spiritual depth in Russian culture." },
+      ],
+      Arabic: [
+        { word: "Sabr (صبر)", trans: "Patience", desc: "Enduring difficulties with calm and resilience." },
+        { word: "Habibi (حبيبي)", trans: "My beloved", desc: "A common affectionate word used for someone you love." },
+        { word: "Inshallah (إن شاء الله)", trans: "If God wills", desc: "An expression of hope that something will happen if it’s meant to be." },
+      ],
+    };
+
+    const languages = Object.keys(WORDS);
+
+    function getRandomWord() {
+      const lang = languages[Math.floor(Math.random() * languages.length)];
+      const words = WORDS[lang];
+      const entry = words[Math.floor(Math.random() * words.length)];
+      return { lang, ...entry };
+    }
+
+    function showWord() {
+      const { lang, word, trans, desc } = getRandomWord();
+      document.getElementById("lang").textContent = lang;
+      document.getElementById("word").textContent = word;
+      document.getElementById("translation").textContent = trans;
+      document.getElementById("description").textContent = desc;
+
+      const content = document.getElementById("content");
+      content.classList.remove("show");
+      setTimeout(() => content.classList.add("show"), 100);
+    }
+
+    document.getElementById("generate").addEventListener("click", showWord);
+  </script>
+</body>
+</html>
