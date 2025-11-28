@@ -12,7 +12,11 @@
       --fg: #1C1D22;
     }
 
-    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
     html, body {
       height: 100%;
       margin: 0;
@@ -26,47 +30,61 @@
 
     .card {
       background: #fff;
-      border-radius: 20px;
-      padding: 32px;
-      width: 100%;
-      max-width: 420px;
-      text-align: center;
-      box-shadow: 0 6px 22px rgba(28,29,34,0.08);
+      border-radius: 18px;
+      padding: 24px 32px;
+      width: 90%;
+      max-width: 750px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 6px 20px rgba(28,29,34,0.08);
       transition: all 0.3s ease;
+      gap: 20px;
+    }
+
+    .left {
+      flex: 1;
+      text-align: left;
+    }
+
+    .right {
+      text-align: center;
+      min-width: 160px;
     }
 
     h1 {
       font-size: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
     .lang {
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.7;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .word {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 700;
       margin: 6px 0;
     }
 
     .translation {
-      font-size: 16px;
-      color: rgba(28,29,34,0.75);
+      font-size: 15px;
+      color: rgba(28,29,34,0.8);
       margin-bottom: 8px;
+      font-weight: 500;
     }
 
     .description {
       font-size: 14px;
       color: rgba(28,29,34,0.75);
       line-height: 1.5;
-      min-height: 40px;
+      max-width: 460px;
     }
 
     button {
-      margin-top: 18px;
       background: var(--fg);
       color: #fff;
       border: none;
@@ -75,6 +93,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
+      width: 100%;
     }
 
     button:hover {
@@ -82,9 +101,10 @@
     }
 
     .footer {
+      position: absolute;
+      bottom: 18px;
       font-size: 12px;
       color: rgba(28,29,34,0.55);
-      margin-top: 22px;
     }
 
     .fade {
@@ -101,15 +121,18 @@
 </head>
 <body>
   <div class="card">
-    <h1>Word of the Day</h1>
-    <div id="content" class="fade">
-      <div class="lang" id="lang"></div>
-      <div class="word" id="word">—</div>
-      <div class="translation" id="translation"></div>
-      <div class="description" id="description"></div>
+    <div class="left">
+      <h1>Word of the Day</h1>
+      <div id="content" class="fade">
+        <div class="lang" id="lang"></div>
+        <div class="word" id="word">—</div>
+        <div class="translation" id="translation"></div>
+        <div class="description" id="description"></div>
+      </div>
     </div>
-    <button id="generate">Generate Word</button>
-    <div class="footer">Sylea Studio • Polyglot OS</div>
+    <div class="right">
+      <button id="generate">Generate</button>
+    </div>
   </div>
 
   <script>
@@ -161,8 +184,7 @@
       ],
       Arabic: [
         { word: "Sabr (صبر)", trans: "Patience", desc: "Enduring difficulties with calm and resilience." },
-        { word: "Habibi (حبيبي)", trans: "My beloved", desc: "A common affectionate word used for someone you love." },
-        { word: "Inshallah (إن شاء الله)", trans: "If God wills", desc: "An expression of hope that something will happen if it’s meant to be." },
+        { word: "Habibi (حبيبي)", trans: "My beloved", desc: "A common affectionate word used for someone you love." }
       ],
     };
 
